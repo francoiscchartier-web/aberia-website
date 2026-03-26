@@ -162,12 +162,21 @@
   });
 
   // ─── Language Switch ───
+  // Detect base path (e.g. '/aberia-website/' on GitHub Pages, '/' on server)
+  var scriptEl = document.querySelector('script[src*="main.js"]');
+  var basePath = '/';
+  if (scriptEl) {
+    var src = scriptEl.getAttribute('src');
+    var idx = src.indexOf('js/main.js');
+    if (idx > 0) basePath = src.substring(0, idx);
+  }
+
   var langMap = {
-    '/': '/fr/',
-    '/product': '/fr/produit',
-    '/pricing': '/fr/tarifs',
-    '/the-current': '/fr/le-courant',
-    '/about': '/fr/a-propos',
+    '': 'fr/',
+    'product': 'fr/produit',
+    'pricing': 'fr/tarifs',
+    'the-current': 'fr/le-courant',
+    'about': 'fr/a-propos',
   };
 
   var reverseLangMap = {};
@@ -177,39 +186,50 @@
     }
   }
 
+  // Strip base path and trailing slash to get the route segment
+  function getRoute(pathname) {
+    var route = pathname;
+    if (basePath !== '/' && route.startsWith(basePath)) {
+      route = route.substring(basePath.length);
+    } else if (route.startsWith('/')) {
+      route = route.substring(1);
+    }
+    return route.replace(/\/$/, '');
+  }
+
   document.querySelectorAll('[data-lang-switch]').forEach(function (link) {
     link.addEventListener('click', function (e) {
       e.preventDefault();
       var targetLang = this.getAttribute('data-lang-switch');
-      var path = window.location.pathname.replace(/\/$/, '') || '/';
+      var route = getRoute(window.location.pathname);
 
       localStorage.setItem('aberia-lang', targetLang);
 
-      var targetPath;
+      var targetRoute;
       if (targetLang === 'fr') {
-        targetPath = langMap[path] || '/fr/';
+        targetRoute = langMap[route] || 'fr/';
       } else {
-        targetPath = reverseLangMap[path] || '/';
+        targetRoute = reverseLangMap[route] || '';
       }
 
-      window.location.href = targetPath;
+      window.location.href = basePath + targetRoute;
     });
   });
 
   // ─── Language redirect on return visit ───
   var storedLang = localStorage.getItem('aberia-lang');
-  var currentPath = window.location.pathname;
-  var isFrench = currentPath.startsWith('/fr');
+  var currentRoute = getRoute(window.location.pathname);
+  var isFrench = currentRoute.startsWith('fr');
 
   if (storedLang === 'fr' && !isFrench) {
-    var frPath = langMap[currentPath.replace(/\/$/, '') || '/'];
-    if (frPath) {
-      window.location.replace(frPath);
+    var frRoute = langMap[currentRoute];
+    if (frRoute !== undefined) {
+      window.location.replace(basePath + frRoute);
     }
   } else if (storedLang === 'en' && isFrench) {
-    var enPath = reverseLangMap[currentPath.replace(/\/$/, '') || '/fr/'];
-    if (enPath) {
-      window.location.replace(enPath);
+    var enRoute = reverseLangMap[currentRoute];
+    if (enRoute !== undefined) {
+      window.location.replace(basePath + enRoute);
     }
   }
 })();
