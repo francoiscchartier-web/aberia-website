@@ -226,14 +226,14 @@ h4, h5, h6 {
 }
 
 
-/* --- Fix 2: Section Labels — Degular, sentence case, copper, BOLD --- */
+/* --- Fix 2: Section Labels — Degular, ALL CAPS, copper, BOLD --- */
 .section-label,
 .label {
   font-family: var(--font-body);
   font-weight: 700;
-  text-transform: none;
+  text-transform: uppercase;
   font-size: 14px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.08em;
   color: var(--copper);
   margin-bottom: 12px;
   display: block;
