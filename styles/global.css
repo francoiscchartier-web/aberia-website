@@ -123,29 +123,43 @@ h1, h2, h3, h4, h5, h6, p {
   --duration-reveal: 0.8s;
   --spring: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* Spacing */
+  /* Spacing (8px base grid) */
   --space-xs: 8px;
   --space-sm: 16px;
   --space-md: 24px;
-  --space-lg: 48px;
-  --space-xl: 80px;
-  --space-2xl: 120px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
   --section-gap: 100px;
 
   /* Layout */
   --content-max: 1200px;
-  --content-padding: 24px;
+  --content-padding: 16px;
 }
 
 @media (min-width: 768px) {
   :root {
-    --content-padding: 48px;
+    --content-padding: 24px;
   }
 }
 
 @media (min-width: 1024px) {
   :root {
-    --content-padding: 64px;
+    --content-padding: 32px;
+  }
+}
+
+/* Wide desktop — extra space becomes margins, not wider content */
+@media (min-width: 1280px) {
+  :root {
+    --content-padding: 32px;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --content-padding: 32px;
   }
 }
 
@@ -160,7 +174,7 @@ h1, h2, h3, h4, h5, h6, p {
 body {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 16px;
+  font-size: clamp(15px, 1.5vw, 16px);
   line-height: 1.5;
   color: var(--ink);
   background: var(--white);
@@ -173,7 +187,7 @@ body {
 p {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 16px;
+  font-size: clamp(15px, 1.5vw, 16px);
   line-height: 1.5;
   color: var(--ink);
   margin: 0 0 var(--space-sm) 0;
@@ -189,19 +203,19 @@ h1, h2 {
   font-family: var(--font-display);
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.06em;
   color: var(--petrol);
   margin: 0;
 }
 
 h1 {
-  font-size: clamp(34px, 5vw, 48px);
+  font-size: clamp(28px, 4vw, 48px);
   line-height: 1.0;
   margin-bottom: 20px;
 }
 
 h2 {
-  font-size: clamp(26px, 3.5vw, 32px);
+  font-size: clamp(22px, 3vw, 32px);
   line-height: 1.05;
   margin-bottom: 16px;
 }
@@ -213,7 +227,7 @@ h3 {
   letter-spacing: 0;
   line-height: 1.15;
   color: var(--petrol);
-  font-size: clamp(20px, 2.5vw, 24px);
+  font-size: clamp(18px, 2.5vw, 24px);
   margin: 0;
 }
 
@@ -232,7 +246,7 @@ h4, h5, h6 {
   font-family: var(--font-body);
   font-weight: 700;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: clamp(11px, 1.2vw, 13px);
   letter-spacing: 0.08em;
   color: var(--copper);
   margin-bottom: 12px;
@@ -353,19 +367,22 @@ blockquote + p,
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--content-padding);
+  box-sizing: border-box;
 }
 
 .container-narrow {
   max-width: 780px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--content-padding);
+  box-sizing: border-box;
 }
 
 .container-tight {
   max-width: 620px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--content-padding);
+  box-sizing: border-box;
 }
 
 /* v6 layout aliases */
@@ -373,7 +390,8 @@ blockquote + p,
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--content-padding);
+  box-sizing: border-box;
 }
 
 .page-container--narrow {
@@ -381,9 +399,9 @@ blockquote + p,
 }
 
 /* JSX short aliases */
-.ctr { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-.ctr-n { max-width: 780px; margin: 0 auto; padding: 0 24px; }
-.ctr-t { max-width: 620px; margin: 0 auto; padding: 0 24px; }
+.ctr { max-width: 1200px; margin: 0 auto; padding: 0 var(--content-padding); box-sizing: border-box; }
+.ctr-n { max-width: 780px; margin: 0 auto; padding: 0 var(--content-padding); box-sizing: border-box; }
+.ctr-t { max-width: 620px; margin: 0 auto; padding: 0 var(--content-padding); box-sizing: border-box; }
 
 .grid-2 {
   display: grid;
@@ -434,11 +452,11 @@ section {
 
 /* Section classes */
 .section {
-  padding: var(--space-xl) 0;
+  padding: var(--space-3xl) 0;
 }
 
 .section--lg {
-  padding: var(--space-2xl) 0;
+  padding: var(--space-3xl) 0;
 }
 
 .section--shade {
@@ -456,6 +474,19 @@ section {
 .section-dark {
   background-color: var(--ink);
   color: var(--text-inverse);
+}
+
+/* Text column — 720px for long-form readability (~65 cpl) */
+.text-column {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Landing section text constraint */
+.landing-section p,
+.landing-section .text-block {
+  max-width: 720px;
 }
 
 /* Structural border */
