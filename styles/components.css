@@ -157,6 +157,42 @@
   color: var(--ink);
   padding-left: 20px;
   border-left: 1.5px solid var(--petrol);
+  margin: 2em 0;
+}
+
+.whisper-camera p {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(16px, 2vw, 18px);
+  line-height: 1.6;
+  color: var(--ink);
+  text-transform: none;
+}
+
+/* Bridge Whisper paragraph styling */
+.whisper-bridge p {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(18px, 2.5vw, 24px);
+  line-height: 1.5;
+  color: var(--ink);
+  text-transform: none;
+}
+
+/* Whisper on dark backgrounds */
+.section-dark .whisper p,
+.section-dark .whisper-camera p,
+.section-dark .whisper-bridge p,
+.bg-ink .whisper p,
+.bg-ink .whisper-camera p {
+  color: var(--white);
+}
+
+.section-dark .whisper-attribution,
+.bg-ink .whisper-attribution {
+  color: var(--copper);
 }
 
 
