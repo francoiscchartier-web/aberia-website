@@ -6,50 +6,10 @@
    reading content stays fixed. Jeton-inspired, ABERIA-adapted.
    ========================================================================== */
 
-/* --- Font Face Declarations ---
-   Replace src paths with actual .woff2 locations once files are loaded.
-   Until then, fallback stack activates automatically.
+/* --- Font Loading ---
+   Fonts loaded via Adobe Typekit (see Base.astro <link>).
+   miller-display + degular served from Typekit CDN.
    ----------------------------------------------------------------- */
-
-@font-face {
-  font-family: 'Miller Display';
-  src: url('/fonts/MillerDisplay-SemiBold.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Miller Display';
-  src: url('/fonts/MillerDisplay-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Miller Display';
-  src: url('/fonts/MillerDisplay-LightItalic.woff2') format('woff2');
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Degular';
-  src: url('/fonts/Degular-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Degular';
-  src: url('/fonts/Degular-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
 
 /* --- Root Custom Properties ---
    ----------------------------------------------------------------- */
@@ -59,15 +19,11 @@
   text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 
-  /* === BRAND PALETTE (v4 — unchanged) === */
-  --petrol: #1B5162;
-  --petrol-hover: #24536A;
-  --copper: #D4652B;
-  --copper-hover: #E0732F;
-  --warm-shade: #F1EEE6;
-  --warm-shade-hover: #E6E2D8;
-  --ink-black: #1A1A1A;
-  --white: #FFFFFF;
+  /* === BRAND PALETTE — v5 aliases pointing to v4 tokens === */
+  /* Core colors defined in global.css — these are v5 name aliases */
+  --warm-shade: var(--shade);
+  --warm-shade-hover: var(--shade-hover);
+  --ink-black: var(--ink);
   --muted: #8A9AA6;
   --nav-text: #3A4248;
 
