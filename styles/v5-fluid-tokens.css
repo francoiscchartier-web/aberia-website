@@ -1,0 +1,217 @@
+/* ==========================================================================
+   ABERIA v5 — Fluid Design Tokens
+   "Intelligence Rendered" Visual Signature
+   
+   Selective fluid scaling: cinematic elements scale with viewport,
+   reading content stays fixed. Jeton-inspired, ABERIA-adapted.
+   ========================================================================== */
+
+/* --- Font Face Declarations ---
+   Replace src paths with actual .woff2 locations once files are loaded.
+   Until then, fallback stack activates automatically.
+   ----------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Miller Display';
+  src: url('/fonts/MillerDisplay-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Miller Display';
+  src: url('/fonts/MillerDisplay-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Miller Display';
+  src: url('/fonts/MillerDisplay-LightItalic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Degular';
+  src: url('/fonts/Degular-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Degular';
+  src: url('/fonts/Degular-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --- Root Custom Properties ---
+   ----------------------------------------------------------------- */
+
+:root {
+  /* Accessibility */
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+
+  /* === BRAND PALETTE (v4 — unchanged) === */
+  --petrol: #1B5162;
+  --petrol-hover: #24536A;
+  --copper: #D4652B;
+  --copper-hover: #E0732F;
+  --warm-shade: #F1EEE6;
+  --warm-shade-hover: #E6E2D8;
+  --ink-black: #1A1A1A;
+  --white: #FFFFFF;
+  --muted: #8A9AA6;
+  --nav-text: #3A4248;
+
+  /* === SURFACES === */
+  --surface-white: #FFFFFF;
+  --surface-warm: #F1EEE6;
+  --surface-dark: #1B5162;
+
+  /* === BORDERS === */
+  --border-default: rgba(0, 0, 0, 0.12);
+  --border-accent: #1B5162;
+  --border-structural: #1A1A1A;
+  --border-whisper: #1B5162;
+
+  /* === TYPOGRAPHY STACKS === */
+  --font-display: 'Miller Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Degular', Calibri, 'Helvetica Neue', Arial, sans-serif;
+
+  /* === FLUID TYPE SCALE ===
+     Pattern: clamp(mobile-min, fluid-vw, desktop-max)
+     
+     FLUID elements (scale with viewport):
+     - Hero H1, monument numbers, whisper voice, section H2s
+     
+     FIXED elements (do not scale):
+     - Body text, labels, nav, buttons, card content, footer
+     ----------------------------------------------------------------- */
+
+  /* Hero headline — the biggest type on the site */
+  --type-hero: clamp(48px, 5.5vw, 96px);
+
+  /* Monument numbers — stat figures rendered at display scale */
+  --type-monument: clamp(64px, 9vw, 180px);
+  --type-monument-secondary: clamp(48px, 6vw, 120px);
+
+  /* Section H2 — fluid but more restrained */
+  --type-h2: clamp(26px, 3vw, 44px);
+
+  /* Whisper voice — fluid per François directive */
+  --type-whisper-bridge: clamp(17px, 2vw, 26px);
+  --type-whisper-camera: clamp(15px, 1.6vw, 22px);
+
+  /* Fixed type (does NOT scale with viewport) */
+  --type-body: 16px;
+  --type-body-small: 15px;
+  --type-label: 11px;
+  --type-label-lg: 13px;
+  --type-nav: 12px;
+  --type-button: 11px;
+  --type-caption: 13px;
+  --type-micro: 10px;
+  --type-card-title: 18px;
+  --type-card-body: 14px;
+
+  /* H3 — fixed, not fluid */
+  --type-h3: clamp(18px, 2vw, 24px);
+
+  /* === FLUID SPACING ===
+     Section padding, vertical rhythm, margins
+     ----------------------------------------------------------------- */
+  
+  /* Hero vertical padding */
+  --space-hero-top: clamp(80px, 10vw, 200px);
+  --space-hero-bottom: clamp(64px, 8vw, 160px);
+
+  /* Standard section padding */
+  --space-section-y: clamp(48px, 6vw, 120px);
+  --space-section-x: clamp(24px, 4vw, 80px);
+
+  /* Whisper bridge vertical padding */
+  --space-whisper: clamp(32px, 4vw, 64px);
+
+  /* Inter-element spacing */
+  --space-stack-lg: clamp(32px, 3vw, 56px);
+  --space-stack-md: clamp(20px, 2vw, 36px);
+  --space-stack-sm: clamp(12px, 1vw, 20px);
+
+  /* === LAYOUT === */
+  --max-content: 1800px;
+  --max-text: 640px;
+  --max-text-wide: 720px;
+  --max-whisper: 560px;
+  --max-card: 540px;
+
+  /* === BORDERS === */
+  --border-w-default: 0.5px;
+  --border-w-whisper: 1.5px;
+  --border-w-structural: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+
+  /* === MOTION ===
+     All durations. All easings. Everything in one place.
+     ----------------------------------------------------------------- */
+  --duration-reveal: 600ms;
+  --duration-whisper: 800ms;
+  --duration-countup: 1200ms;
+  --duration-convergence: 1500ms;
+  --duration-nav: 300ms;
+  --duration-hover: 200ms;
+  --ease-reveal: ease-out;
+  --ease-hover: ease-out;
+
+  /* === OPACITY SYSTEM (text on dark surfaces) === */
+  --opacity-primary: 1;
+  --opacity-secondary: 0.65;
+  --opacity-tertiary: 0.5;
+  --opacity-hint: 0.4;
+  --opacity-ghost: 0.3;
+}
+
+/* === ULTRAWIDE CAP ===
+   Content wrapper prevents stretching on 3440px+ displays.
+   Dark/full-bleed sections use this on inner content only.
+   ----------------------------------------------------------------- */
+
+.page-wrapper {
+  max-width: var(--max-content);
+  margin: 0 auto;
+}
+
+/* Full-bleed sections: background extends edge-to-edge,
+   inner content respects the cap */
+.section-bleed {
+  width: 100%;
+}
+.section-bleed > .section-inner {
+  max-width: var(--max-content);
+  margin: 0 auto;
+  padding-left: var(--space-section-x);
+  padding-right: var(--space-section-x);
+}
+
+/* Contained sections: padding on the section itself */
+.section-contained {
+  max-width: var(--max-content);
+  margin: 0 auto;
+  padding-left: var(--space-section-x);
+  padding-right: var(--space-section-x);
+}
+
+/* Text measure — prevents lines from exceeding readable length */
+.measure { max-width: var(--max-text); }
+.measure-wide { max-width: var(--max-text-wide); }
+.measure-whisper { max-width: var(--max-whisper); }
+.measure-card { max-width: var(--max-card); }
